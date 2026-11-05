@@ -1,0 +1,18 @@
+---
+layout: default
+title: Essays
+permalink: /essays/
+---
+<section class="wrap narrow listing">
+  <header class="page-header">
+    <h1>Essays</h1>
+    <p class="subtitle">Longer pieces, written to last.</p>
+  </header>
+  {% for post in site.posts %}
+    {% assign y = post.date | date: "%Y" %}
+    {% if y != prev_y %}<h2 class="year-label">{{ y }}</h2>{% assign prev_y = y %}{% endif %}
+    {% include post-item.html item=post excerpt=true %}
+  {% else %}
+    <p class="empty">No essays yet.</p>
+  {% endfor %}
+</section>

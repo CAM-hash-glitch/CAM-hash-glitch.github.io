@@ -1,0 +1,27 @@
+---
+layout: default
+title: Tags
+permalink: /tags/
+---
+{%- assign everything = site.posts | concat: site.notes | sort: "date" | reverse -%}
+{%- assign all_tags = "" | split: "" -%}
+{%- for item in everything -%}{%- assign all_tags = all_tags | concat: item.tags -%}{%- endfor -%}
+{%- assign all_tags = all_tags | uniq | sort_natural -%}
+<section class="wrap narrow tags-page">
+  <header class="page-header"><h1>Tags</h1></header>
+  <p class="tag-cloud">{% for t in all_tags %}<a class="tag" href="#{{ t | slugify }}">{{ t }}</a>{% endfor %}</p>
+  {% for t in all_tags %}
+  <section class="tag-section" id="{{ t | slugify }}">
+    <h2 class="year-label">{{ t }}</h2>
+    <ul class="archive-year">
+      {% for item in everything %}{% if item.tags contains t %}
+      <li class="archive-row">
+        <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %-d, %Y" }}</time>
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+        {% if item.collection == "notes" %}<span class="kind kind-note">note</span>{% else %}<span class="kind kind-essay">essay</span>{% endif %}
+      </li>
+      {% endif %}{% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</section>
