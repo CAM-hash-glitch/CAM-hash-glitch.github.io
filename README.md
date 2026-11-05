@@ -1,1 +1,1 @@
-# CAM-hash-glitch.github.io
+# pursuit-of-curiosity.github.io
