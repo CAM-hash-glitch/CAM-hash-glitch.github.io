@@ -15,8 +15,8 @@ author:
   avatar: ""
   location: ""               # optional, e.g. "New York, NY"
   email: ""                  # optional; shown publicly as a link
-  twitter: ""                # optional, without the @
-  linkedin: ""               # optional, full profile URL
+  twitter: ""                # X handle without the @, e.g. jane_doe → shown as an icon under your photo
+  linkedin: ""               # full URL, e.g. https://www.linkedin.com/in/jane-doe → icon under your photo
   substack: ""               # optional, full URL
   github: CAM-hash-glitch    # optional
 

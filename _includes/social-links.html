@@ -1,10 +1,7 @@
 {%- assign a = site.author -%}
 <ul class="social-links">
   <li><a href="{{ '/about/' | relative_url }}">More about me</a></li>
-  {% if a.twitter and a.twitter != "" %}<li><a href="https://x.com/{{ a.twitter }}">X / Twitter</a></li>{% endif %}
-  {% if a.linkedin and a.linkedin != "" %}<li><a href="{{ a.linkedin }}">LinkedIn</a></li>{% endif %}
   {% if a.substack and a.substack != "" %}<li><a href="{{ a.substack }}">Substack</a></li>{% endif %}
   {% if a.github and a.github != "" %}<li><a href="https://github.com/{{ a.github }}">GitHub</a></li>{% endif %}
   {% if a.email and a.email != "" %}<li><a href="mailto:{{ a.email }}">Email</a></li>{% endif %}
-  <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
 </ul>
