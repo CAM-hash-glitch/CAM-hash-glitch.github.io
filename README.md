@@ -6,8 +6,9 @@ A personal site for essays and notes, built with [Jekyll](https://jekyllrb.com/)
 
 1. Merge this branch into `main`.
 2. In the repo on GitHub: **Settings → Pages → Build and deployment → Source: "Deploy from a branch"**, branch `main`, folder `/ (root)`.
-3. Edit `_config.yml`: set `title`, `tagline`, `description`, and `author.name`.
-4. Rewrite `about.md`, and replace or delete the sample essay and note.
+3. Edit `_config.yml`: set `title`, `tagline`, and the `author` block (name, one-line headline, photo, links). Put a square photo at `assets/img/avatar.jpg` and set `author.avatar: /assets/img/avatar.jpg`.
+4. Write the "about me" text shown on the home page in `_includes/intro.md`.
+5. Rewrite `about.md`, and replace or delete the sample essay and note.
 
 GitHub rebuilds the site automatically on every push to `main` (usually within a minute).
 
@@ -15,7 +16,7 @@ GitHub rebuilds the site automatically on every push to `main` (usually within a
 
 | What | Where | Filename |
 |---|---|---|
-| Essay (long-form) | `_posts/` | `YYYY-MM-DD-slug.md` |
+| Blog post | `_posts/` | `YYYY-MM-DD-slug.md` |
 | Note (short) | `_notes/` | `YYYY-MM-DD-slug.md` |
 | Unfinished draft | `_drafts/` | `slug.md` (never published) |
 
@@ -35,7 +36,7 @@ Optional front-matter fields:
 subtitle: One-sentence dek shown under the title and in listings
 description: Overrides the excerpt used in listings, search engines, and social previews
 tags: [economics, ai]
-featured: true        # essays only: pin to the "Start here" section on the home page
+featured: true        # blog posts only: show under "Suggested reading" on the home page (up to 3)
 updated: 2026-12-01   # shows an "Updated" line
 math: true            # load KaTeX; write $$...$$ for math
 image: /assets/img/cover.png   # social-preview image
@@ -49,12 +50,12 @@ You can write entirely in the GitHub web UI: open `_posts/`, click **Add file �
 
 ## Site structure
 
-- `/`: hero, featured essays, latest essays, recent notes
-- `/essays/`: all essays, grouped by year
+- `/`: about-me intro, suggested reading, latest blog posts, recent notes
+- `/blog/`: all blog posts, grouped by year
 - `/notes/`: running stream of the 30 newest notes, shown in full
 - `/archive/`: everything, with a title/tag filter and an essays/notes toggle
 - `/tags/`, `/about/`, `/subscribe/`
-- Feeds: `/feed.xml` (essays), `/feed/notes.xml` (notes)
+- Feeds: `/feed.xml` (blog), `/feed/notes.xml` (notes)
 
 ## Email subscriptions
 

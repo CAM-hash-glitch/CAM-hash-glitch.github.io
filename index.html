@@ -3,26 +3,44 @@ layout: default
 body_class: home
 ---
 {%- assign featured = site.posts | where: "featured", true -%}
+{%- if featured.size == 0 -%}{%- assign featured = site.posts -%}{%- endif -%}
 {%- assign notes = site.notes | sort: "date" | reverse -%}
+{%- assign a = site.author -%}
 
-<section class="hero wrap narrow">
-  <h1 class="hero-title">{{ site.title }}</h1>
-  <p class="hero-tagline">{{ site.tagline }}</p>
-  <p class="hero-actions">
-    <a class="btn" href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
-    <a class="btn btn-ghost" href="{{ '/about/' | relative_url }}">About</a>
-  </p>
+<section class="intro wrap" aria-labelledby="intro-h">
+  <div class="intro-photo">
+    {% if a.avatar and a.avatar != "" %}
+      <img src="{{ a.avatar | relative_url }}" alt="Photo of {{ a.name }}" width="168" height="168">
+    {% else %}
+      {%- assign parts = a.name | split: " " -%}
+      <span class="avatar-initials" aria-hidden="true">{% for w in parts limit: 2 %}{{ w | slice: 0 }}{% endfor %}</span>
+    {% endif %}
+  </div>
+  <div class="intro-text">
+    <p class="intro-kicker">{{ site.title }}</p>
+    <h1 id="intro-h" class="intro-name">Hi, I’m {{ a.name }}.</h1>
+    {% if a.headline and a.headline != "" %}<p class="intro-headline">{{ a.headline }}{% if a.location and a.location != "" %} <span class="intro-location">· {{ a.location }}</span>{% endif %}</p>{% endif %}
+    <div class="intro-bio prose">
+      {% capture intro %}{% include intro.md %}{% endcapture %}{{ intro | markdownify }}
+    </div>
+    {% include social-links.html %}
+    <p class="intro-actions">
+      <a class="btn" href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
+      <a class="btn btn-ghost" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+    </p>
+  </div>
 </section>
 
-{% if featured.size > 0 %}
+{% if site.posts.size > 0 %}
 <section class="wrap featured" aria-labelledby="featured-h">
-  <h2 id="featured-h" class="section-label">Start here</h2>
+  <h2 id="featured-h" class="section-label">Suggested reading</h2>
   <div class="featured-grid">
     {% for post in featured limit: 3 %}
     <a class="featured-card" href="{{ post.url | relative_url }}">
       <span class="featured-date">{{ post.date | date: "%B %Y" }}</span>
       <span class="featured-title">{{ post.title }}</span>
       <span class="featured-excerpt">{{ post.subtitle | default: post.description | default: post.excerpt | strip_html | truncatewords: 28 }}</span>
+      <span class="featured-more">Read →</span>
     </a>
     {% endfor %}
   </div>
@@ -31,13 +49,13 @@ body_class: home
 
 <div class="wrap home-columns">
   <section class="home-essays" aria-labelledby="essays-h">
-    <h2 id="essays-h" class="section-label">Latest essays</h2>
+    <h2 id="essays-h" class="section-label">Latest from the blog</h2>
     {% for post in site.posts limit: site.home_essay_count %}
       {% include post-item.html item=post excerpt=true %}
     {% else %}
-      <p class="empty">No essays yet.</p>
+      <p class="empty">No posts yet.</p>
     {% endfor %}
-    {% if site.posts.size > site.home_essay_count %}<p class="see-all"><a href="{{ '/essays/' | relative_url }}">All essays →</a></p>{% endif %}
+    <p class="see-all"><a href="{{ '/blog/' | relative_url }}">All posts →</a></p>
   </section>
 
   <aside class="home-notes" aria-labelledby="notes-h">

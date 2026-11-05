@@ -7,8 +7,8 @@ permalink: /about/
 
 This is a place for two kinds of writing:
 
-- **Essays** — longer pieces I've thought through carefully and expect to stand behind.
-- **Notes** — shorter, quicker posts: links with commentary, observations, open questions, and drafts of ideas that might become essays later.
+- **Blog posts**: longer pieces I've thought through carefully and expect to stand behind.
+- **Notes**: shorter, quicker posts: links with commentary, observations, open questions, and drafts of ideas that might become blog posts later.
 
 A few things worth saying up front:
 
