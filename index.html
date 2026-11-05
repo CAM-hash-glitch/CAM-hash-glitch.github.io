@@ -15,6 +15,7 @@ body_class: home
       {%- assign parts = a.name | split: " " -%}
       <span class="avatar-initials" aria-hidden="true">{% for w in parts limit: 2 %}{{ w | slice: 0 }}{% endfor %}</span>
     {% endif %}
+    {% include profile-icons.html %}
   </div>
   <div class="intro-text">
     <p class="intro-kicker">{{ site.title }}</p>
