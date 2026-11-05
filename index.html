@@ -1,0 +1,75 @@
+---
+layout: default
+body_class: home
+---
+{%- assign featured = site.posts | where: "featured", true -%}
+{%- if featured.size == 0 -%}{%- assign featured = site.posts -%}{%- endif -%}
+{%- assign notes = site.notes | sort: "date" | reverse -%}
+{%- assign a = site.author -%}
+
+<section class="intro wrap" aria-labelledby="intro-h">
+  <div class="intro-photo">
+    {% if a.avatar and a.avatar != "" %}
+      <img src="{{ a.avatar | relative_url }}" alt="Photo of {{ a.name }}" width="168" height="168">
+    {% else %}
+      {%- assign parts = a.name | split: " " -%}
+      <span class="avatar-initials" aria-hidden="true">{% for w in parts limit: 2 %}{{ w | slice: 0 }}{% endfor %}</span>
+    {% endif %}
+  </div>
+  <div class="intro-text">
+    <p class="intro-kicker">{{ site.title }}</p>
+    <h1 id="intro-h" class="intro-name">Hi, I’m {{ a.name }}.</h1>
+    {% if a.headline and a.headline != "" %}<p class="intro-headline">{{ a.headline }}{% if a.location and a.location != "" %} <span class="intro-location">· {{ a.location }}</span>{% endif %}</p>{% endif %}
+    <div class="intro-bio prose">
+      {% capture intro %}{% include intro.md %}{% endcapture %}{{ intro | markdownify }}
+    </div>
+    {% include social-links.html %}
+    <p class="intro-actions">
+      <a class="btn" href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
+      <a class="btn btn-ghost" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+    </p>
+  </div>
+</section>
+
+{% if site.posts.size > 0 %}
+<section class="wrap featured" aria-labelledby="featured-h">
+  <h2 id="featured-h" class="section-label">Suggested reading</h2>
+  <div class="featured-grid">
+    {% for post in featured limit: 3 %}
+    <a class="featured-card" href="{{ post.url | relative_url }}">
+      <span class="featured-date">{{ post.date | date: "%B %Y" }}</span>
+      <span class="featured-title">{{ post.title }}</span>
+      <span class="featured-excerpt">{{ post.subtitle | default: post.description | default: post.excerpt | strip_html | truncatewords: 28 }}</span>
+      <span class="featured-more">Read →</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<div class="wrap home-columns">
+  <section class="home-essays" aria-labelledby="essays-h">
+    <h2 id="essays-h" class="section-label">Latest from the blog</h2>
+    {% for post in site.posts limit: site.home_essay_count %}
+      {% include post-item.html item=post excerpt=true %}
+    {% else %}
+      <p class="empty">No posts yet.</p>
+    {% endfor %}
+    <p class="see-all"><a href="{{ '/blog/' | relative_url }}">All posts →</a></p>
+  </section>
+
+  <aside class="home-notes" aria-labelledby="notes-h">
+    <h2 id="notes-h" class="section-label">Recent notes</h2>
+    <ul class="note-list">
+      {% for note in notes limit: site.home_note_count %}
+      <li>
+        <a href="{{ note.url | relative_url }}">{{ note.title }}</a>
+        <time datetime="{{ note.date | date_to_xmlschema }}">{{ note.date | date: "%b %-d" }}</time>
+      </li>
+      {% else %}
+      <li class="empty">No notes yet.</li>
+      {% endfor %}
+    </ul>
+    <p class="see-all"><a href="{{ '/notes/' | relative_url }}">All notes →</a></p>
+  </aside>
+</div>

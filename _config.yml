@@ -1,0 +1,83 @@
+# ─────────────────────────────────────────────────────────────
+#  Site settings — edit these first.
+# ─────────────────────────────────────────────────────────────
+title: Pursuit of Curiosity
+tagline: Writing on ideas worth getting right.
+description: >-
+  Long-form essays and shorter running notes on economics, technology,
+  the future, and whatever else seems worth thinking hard about.
+author:
+  name: Your Name            # shown on the home page, in bylines and in the feed
+  # One line under your name on the home page, e.g. "Economics student at X, interested in Y"
+  headline: "Add a one-line description of yourself in _config.yml"
+  # Photo: put a square image at assets/img/avatar.jpg and set this to /assets/img/avatar.jpg.
+  # Leave blank to show your initials instead.
+  avatar: ""
+  location: ""               # optional, e.g. "New York, NY"
+  email: ""                  # optional; shown publicly as a link
+  twitter: ""                # optional, without the @
+  linkedin: ""               # optional, full profile URL
+  substack: ""               # optional, full URL
+  github: CAM-hash-glitch    # optional
+
+url: "https://cam-hash-glitch.github.io"
+baseurl: ""
+
+# Optional: paste a newsletter signup form action URL (e.g. Buttondown,
+# Substack, Mailchimp) to show an email box. Leave blank to show RSS only.
+newsletter:
+  action: ""                 # e.g. https://buttondown.com/api/emails/embed-subscribe/yourname
+  email_field: email         # name attribute of the email input the service expects
+
+# Number of blog posts listed on the home page before "All posts".
+home_essay_count: 6
+home_note_count: 5
+
+# ─────────────────────────────────────────────────────────────
+#  Content structure
+# ─────────────────────────────────────────────────────────────
+#  _posts/  → blog posts (YYYY-MM-DD-slug.md)
+#  _notes/  → notes    (YYYY-MM-DD-slug.md)
+collections:
+  notes:
+    output: true
+    permalink: /notes/:year/:title/
+
+permalink: /:year/:month/:title/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: notes }
+    values: { layout: note }
+  - scope: { path: "" }
+    values: { layout: page }
+
+# ─────────────────────────────────────────────────────────────
+#  Build
+# ─────────────────────────────────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  footnote_backlink: "↩︎"
+  syntax_highlighter_opts:
+    disable: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  collections:
+    notes:
+      path: "/feed/notes.xml"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle
+  - node_modules

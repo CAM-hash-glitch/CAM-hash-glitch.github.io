@@ -1,0 +1,17 @@
+<aside class="subscribe-box">
+  <h2>Subscribe to {{ site.title }}</h2>
+  <p>New posts and notes, whenever they're ready. No schedule, no spam.</p>
+  {% if site.newsletter.action and site.newsletter.action != "" %}
+  <form class="subscribe-form" action="{{ site.newsletter.action }}" method="post" target="_blank">
+    <label class="visually-hidden" for="sub-email-{{ include.id | default: 'x' }}">Email address</label>
+    <input id="sub-email-{{ include.id | default: 'x' }}" type="email" name="{{ site.newsletter.email_field | default: 'email' }}" placeholder="you@example.com" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <p class="subscribe-alt">or follow via <a href="{{ '/feed.xml' | relative_url }}">RSS</a></p>
+  {% else %}
+  <p class="subscribe-rss">
+    <a class="btn" href="{{ '/feed.xml' | relative_url }}">Blog RSS</a>
+    <a class="btn btn-ghost" href="{{ '/feed/notes.xml' | relative_url }}">Notes RSS</a>
+  </p>
+  {% endif %}
+</aside>

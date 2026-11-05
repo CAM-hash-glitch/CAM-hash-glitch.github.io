@@ -1,0 +1,13 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</span>
+    <nav aria-label="Footer">
+      <a href="{{ '/feed.xml' | relative_url }}">Blog RSS</a>
+      <a href="{{ '/feed/notes.xml' | relative_url }}">Notes RSS</a>
+      <a href="{{ '/tags/' | relative_url }}">Tags</a>
+      {% if site.author.twitter != "" and site.author.twitter %}<a href="https://x.com/{{ site.author.twitter }}">X / Twitter</a>{% endif %}
+      {% if site.author.github != "" and site.author.github %}<a href="https://github.com/{{ site.author.github }}">GitHub</a>{% endif %}
+    </nav>
+  </div>
+</footer>
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>

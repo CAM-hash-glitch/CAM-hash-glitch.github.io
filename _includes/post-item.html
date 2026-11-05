@@ -1,0 +1,10 @@
+{%- assign item = include.item -%}
+<article class="post-item">
+  <time class="post-item-date" datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %-d, %Y" }}</time>
+  <div class="post-item-body">
+    <h3 class="post-item-title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+    {%- if include.excerpt -%}
+    <p class="post-item-excerpt">{{ item.subtitle | default: item.description | default: item.excerpt | strip_html | truncatewords: 40 }}</p>
+    {%- endif -%}
+  </div>
+</article>

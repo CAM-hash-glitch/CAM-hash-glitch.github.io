@@ -1,0 +1,25 @@
+---
+layout: default
+title: Notes
+permalink: /notes/
+---
+{%- assign notes = site.notes | sort: "date" | reverse -%}
+<section class="wrap narrow notes-stream">
+  <header class="page-header">
+    <h1>Notes</h1>
+    <p class="subtitle">Shorter, faster, less polished: links, observations, and half-formed thoughts.</p>
+  </header>
+  {% for note in notes limit: 30 %}
+  <article class="stream-item">
+    <h2 class="stream-title"><a href="{{ note.url | relative_url }}">{{ note.title }}</a></h2>
+    <p class="post-meta">
+      <time datetime="{{ note.date | date_to_xmlschema }}">{{ note.date | date: "%B %-d, %Y" }}</time>
+      {% if note.tags.size > 0 %}<span aria-hidden="true">·</span>{% include tags.html tags=note.tags %}{% endif %}
+    </p>
+    <div class="prose">{{ note.content }}</div>
+  </article>
+  {% else %}
+  <p class="empty">No notes yet.</p>
+  {% endfor %}
+  {% if notes.size > 30 %}<p class="see-all"><a href="{{ '/archive/' | relative_url }}">Older notes in the archive →</a></p>{% endif %}
+</section>

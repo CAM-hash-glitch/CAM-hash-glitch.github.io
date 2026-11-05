@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<article class="wrap narrow post" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-header">
+    <p class="post-kicker"><a href="{{ '/blog/' | relative_url }}">Blog</a></p>
+    <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+    <p class="post-meta">
+      <span>{{ page.author | default: site.author.name }}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{% include reading-time.html content=content %}</span>
+    </p>
+    {% if page.updated %}<p class="post-updated">Updated {{ page.updated | date: "%B %-d, %Y" }}</p>{% endif %}
+  </header>
+
+  <div class="prose" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer">
+    {% include tags.html tags=page.tags %}
+    {% include subscribe.html id="post" %}
+    <nav class="post-nav" aria-label="More posts">
+      {% if page.previous %}<a class="prev" href="{{ page.previous.url | relative_url }}"><span>← Older</span>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+      {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><span>Newer →</span>{{ page.next.title }}</a>{% endif %}
+    </nav>
+  </footer>
+</article>
